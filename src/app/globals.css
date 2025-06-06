@@ -1,7 +1,6 @@
+@import 'tailwindcss/preflight.css' layer(base);
+@import 'tailwindcss/utilities.css' layer(utilities);
 @import 'tailwindcss';
-@import 'tailwindcss/preflight';
-@tailwind utilities;
-
 @theme {
   --color-background: #fff8e6;
   --color-muted: #fdf1da;
