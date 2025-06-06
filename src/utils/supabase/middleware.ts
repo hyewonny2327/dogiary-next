@@ -1,6 +1,9 @@
 import { createServerClient } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
 
+// 보호된 라우트 목록 (로그인이 필요한 페이지들)
+const protectedRoutes = ['/feed', '/dogs', '/profile', '/map'];
+
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
     request,
@@ -37,12 +40,15 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (
-    !user &&
-    !request.nextUrl.pathname.startsWith('/login') &&
-    !request.nextUrl.pathname.startsWith('/auth')
-  ) {
-    // no user, potentially respond by redirecting the user to the login page
+  const path = request.nextUrl.pathname;
+
+  // 1. 로그인한 사용자가 로그인/회원가입 페이지에 접근하면 홈으로 리다이렉트
+  if (user && (path.startsWith('/login') || path.startsWith('/signup'))) {
+    return NextResponse.redirect(new URL('/', request.url));
+  }
+
+  // 2. 로그인하지 않은 사용자가 보호된 라우트에 접근하면 로그인 페이지로 리다이렉트
+  if (!user && protectedRoutes.some((route) => path.startsWith(route))) {
     const url = request.nextUrl.clone();
     url.pathname = '/login';
     return NextResponse.redirect(url);
