@@ -1,4 +1,4 @@
-import { login, signup } from '@/app/(pages)/login/actions';
+import { login, signup } from '@/app/(pages)/user/login/actions';
 
 export default function LoginPage() {
   return (
