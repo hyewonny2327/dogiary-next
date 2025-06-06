@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { pretendard } from '@/styles/fonts';
-
+import Header from '@/components/layouts/Header';
 export const metadata: Metadata = {
   title: 'Dogiary',
   description: '반려견과의 특별한 순간을 기록하세요',
@@ -10,7 +10,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko" className={`${pretendard.variable} font-pretendard`}>
-      <body className={pretendard.className}>{children}</body>
+      <body className={pretendard.className}>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }
