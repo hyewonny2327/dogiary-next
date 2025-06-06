@@ -13,6 +13,7 @@ export default function Button({
   color = 'primary',
   children,
   className,
+  onClick,
   ...props
 }: ButtonProps) {
   const baseStyles = 'rounded-lg font-medium transition-colors';
@@ -32,7 +33,11 @@ export default function Button({
   };
 
   return (
-    <button className={cn(baseStyles, sizeStyles[size], colorStyles[color], className)} {...props}>
+    <button
+      className={cn(baseStyles, sizeStyles[size], colorStyles[color], className)}
+      {...props}
+      onClick={onClick}
+    >
       {children}
     </button>
   );

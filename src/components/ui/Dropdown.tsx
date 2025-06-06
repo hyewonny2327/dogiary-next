@@ -9,7 +9,7 @@ interface DropdownProps {
     value: string;
   }[];
   placeholder?: string;
-  onChange?: (value: string) => void;
+  onChange?: () => void;
   borderColor?: 'default' | 'primary' | 'accent' | 'error';
   error?: string;
   className?: string;

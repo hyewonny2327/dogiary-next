@@ -7,6 +7,7 @@ import { RiMenu3Line, RiCloseLine } from 'react-icons/ri';
 import { MdPets } from 'react-icons/md';
 import { IoNewspaper } from 'react-icons/io5';
 import { FaUser } from 'react-icons/fa';
+import { useAuthStore } from '@/stores/useAuthStore';
 
 interface MenuItem {
   label: string;
@@ -14,7 +15,7 @@ interface MenuItem {
   icon: React.ReactNode;
 }
 
-const menuItems: MenuItem[] = [
+const authenticatedMenuItems: MenuItem[] = [
   {
     label: '내 피드',
     href: '/feed',
@@ -22,7 +23,7 @@ const menuItems: MenuItem[] = [
   },
   {
     label: '반려견 페이지',
-    href: '/pets',
+    href: '/dogs',
     icon: <MdPets className="h-5 w-5" />,
   },
   {
@@ -32,9 +33,25 @@ const menuItems: MenuItem[] = [
   },
 ];
 
+const unauthenticatedMenuItems: MenuItem[] = [
+  {
+    label: '로그인',
+    href: '/login',
+    icon: <FaUser className="h-5 w-5" />,
+  },
+  {
+    label: '회원가입',
+    href: '/signup',
+    icon: <FaUser className="h-5 w-5" />,
+  },
+];
+
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
+  const { user } = useAuthStore();
+
+  const menuItems = user ? authenticatedMenuItems : unauthenticatedMenuItems;
 
   return (
     <header className="border-border bg-background sticky top-0 z-40 w-full border-b">

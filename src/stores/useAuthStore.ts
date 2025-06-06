@@ -24,6 +24,7 @@ export const useAuthStore = create<AuthState>((set) => ({
       const {
         data: { user },
       } = await supabase.auth.getUser();
+      console.log('user', user);
       set({ user, loading: false });
 
       // 인증 상태 변경 감지
