@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { cn } from '@/utils/utils';
+import { IoChevronDownOutline } from 'react-icons/io5';
 
 interface DropdownProps {
   value?: string;
@@ -68,22 +69,13 @@ export default function Dropdown({
         <span className={cn('block truncate', !selectedOption && 'text-foreground/60')}>
           {selectedOption ? selectedOption.label : placeholder}
         </span>
-        <svg
+        <IoChevronDownOutline
           className={cn(
             'text-foreground/60 h-5 w-5',
             isOpen && 'rotate-180 transform',
             'transition-transform duration-200'
           )}
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-        >
-          <path
-            fillRule="evenodd"
-            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-            clipRule="evenodd"
-          />
-        </svg>
+        />
       </button>
 
       {/* 드롭다운 메뉴 */}
