@@ -2,19 +2,32 @@
 @import 'tailwindcss/preflight';
 @tailwind utilities;
 
+@theme {
+  --color-background: #fff8e6;
+  --color-muted: #fdf1da;
+  --color-primary: #f2d8b2;
+  --color-accent: #c4a77f;
+  --color-foreground: #5f5013;
+  --color-heading: #2f2a0a;
+  --color-border: #ede0c2;
+  --color-highlight: #fff2cb;
+}
+
+[data-theme='dark'] {
+  --color-background: #1e1b16;
+  --color-muted: #2c261f;
+  --color-primary: #a38256;
+  --color-accent: #d0b690;
+  --color-foreground: #ede0c2;
+  --color-heading: #fff8e6;
+  --color-border: #3d362b;
+  --color-highlight: #5f5013;
+}
+
 :root {
-  --foreground: #000000;
-  --background: #ffffff;
+  --header-height: 3.5rem;
+  --sticky-offset: 1.5rem;
+  --sticky-top: calc(var(--header-height) + var(--sticky-offset));
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground: #ffffff;
-    --background: #000000;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
 }
