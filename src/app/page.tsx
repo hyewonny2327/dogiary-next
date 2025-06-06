@@ -1,12 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import NotificationModal from '@/components/ui/NotificationModal';
-import ContentModal from '@/components/ui/ContentsModal';
-import Button from '@/components/ui/Button';
-import Container from '@/components/ui/Container';
-import Dropdown from '@/components/ui/Dropdown';
-import Input from '@/components/ui/Input';
+import NotificationModal from '@/components/common/NotificationModal';
+import ContentModal from '@/components/common/ContentsModal';
+import Button from '@/components/common/Button';
+import Container from '@/components/common/Container';
+import Dropdown from '@/components/common/Dropdown';
+import Input from '@/components/common/Input';
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);

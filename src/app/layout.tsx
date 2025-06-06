@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { pretendard } from '@/styles/fonts';
-import Header from '@/components/layouts/Header';
+import Header from '@/components/common/Header';
 import AuthInitializer from '@/components/AuthInitializer';
 
 export const metadata: Metadata = {

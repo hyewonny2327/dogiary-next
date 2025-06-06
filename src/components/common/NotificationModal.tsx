@@ -1,5 +1,5 @@
 import Button from './Button';
-import Modal from '../common/Modal';
+import Modal from './Modal';
 import { IoClose } from 'react-icons/io5';
 
 interface NotificationModalProps {
