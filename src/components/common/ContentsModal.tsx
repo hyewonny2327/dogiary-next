@@ -1,4 +1,4 @@
-import Modal from '../common/Modal';
+import Modal from './Modal';
 import Image from 'next/image';
 import { cn } from '@/utils/utils';
 import { IoClose } from 'react-icons/io5';
