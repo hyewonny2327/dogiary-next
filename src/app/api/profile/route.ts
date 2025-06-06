@@ -77,9 +77,3 @@ export async function PUT(request: Request) {
     return NextResponse.json({ error: '프로필 업데이트 중 오류가 발생했습니다.' }, { status: 500 });
   }
 }
-
-// src/app/api/profile/avatar/route.ts
-export async function POST(request: Request) {
-  const supabase = createClient();
-  // 이미지 업로드 로직
-}
