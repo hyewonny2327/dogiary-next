@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
   try {
+    // 서비스 역할로 Supabase 클라이언트 생성
     const supabase = await createClient();
     const { email, password, nickname } = await request.json();
 
@@ -23,6 +24,7 @@ export async function POST(request: Request) {
     });
 
     if (authError) {
+      console.error('Auth error:', authError);
       return NextResponse.json({ error: '회원가입에 실패했습니다.' }, { status: 400 });
     }
 
@@ -31,19 +33,46 @@ export async function POST(request: Request) {
     }
 
     // 2. 프로필 생성 (profiles 테이블에 생성)
+    console.log('Creating profile with data:', {
+      id: authData.user.id,
+      user_id: authData.user.id,
+      nickname,
+      image_url: '',
+      walk_count: 0,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    });
+
+    // 서비스 역할로 프로필 생성
     const { error: profileError } = await supabase.from('profiles').insert({
       id: authData.user.id,
+      user_id: authData.user.id,
       nickname,
+      image_url: '',
       walk_count: 0,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     });
 
     if (profileError) {
+      console.error('Profile creation error:', profileError);
+      console.error('Error details:', {
+        code: profileError.code,
+        message: profileError.message,
+        details: profileError.details,
+        hint: profileError.hint,
+      });
+
       // 프로필 생성 실패 시 생성된 auth 계정도 삭제
       await supabase.auth.admin.deleteUser(authData.user.id);
 
-      return NextResponse.json({ error: '프로필 생성에 실패했습니다.' }, { status: 400 });
+      return NextResponse.json(
+        {
+          error: '프로필 생성에 실패했습니다.',
+          details: profileError.message,
+        },
+        { status: 400 }
+      );
     }
 
     return NextResponse.json({
