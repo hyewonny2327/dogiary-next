@@ -46,7 +46,7 @@ export async function POST(request: Request) {
     // 서비스 역할로 프로필 생성
     const { error: profileError } = await supabase.from('profiles').insert({
       id: authData.user.id,
-      user_id: authData.user.id,
+      user_id: authData.user.email,
       nickname,
       image_url: '',
       walk_count: 0,

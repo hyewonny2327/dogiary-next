@@ -1,13 +1,13 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { cn } from '@/utils/utils';
 import { RiMenu3Line, RiCloseLine } from 'react-icons/ri';
 import { MdPets } from 'react-icons/md';
 import { IoNewspaper } from 'react-icons/io5';
 import { FaUser } from 'react-icons/fa';
 import { useAuthStore } from '@/stores/useAuthStore';
+import { usePathname } from 'next/navigation';
 
 interface MenuItem {
   label: string;
@@ -28,7 +28,7 @@ const authenticatedMenuItems: MenuItem[] = [
   },
   {
     label: '마이페이지',
-    href: '/profile',
+    href: '/user/profile',
     icon: <FaUser className="h-5 w-5" />,
   },
 ];
@@ -48,8 +48,8 @@ const unauthenticatedMenuItems: MenuItem[] = [
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const router = useRouter();
   const { user } = useAuthStore();
+  const pathname = usePathname();
 
   const menuItems = user ? authenticatedMenuItems : unauthenticatedMenuItems;
 
@@ -71,7 +71,7 @@ export default function Header() {
                 'flex items-center gap-2',
                 'text-foreground/70 hover:text-foreground transition-colors',
                 'text-base font-medium',
-                router.pathname === item.href && 'text-foreground font-semibold'
+                pathname === item.href && 'text-foreground font-semibold'
               )}
             >
               {item.icon}
@@ -102,7 +102,7 @@ export default function Header() {
                     'flex h-14 items-center gap-3 px-6',
                     'text-foreground/70 hover:text-foreground',
                     'border-border border-b transition-colors',
-                    router.pathname === item.href && 'bg-primary/5 text-foreground font-medium'
+                    pathname === item.href && 'bg-primary/5 text-foreground font-medium'
                   )}
                 >
                   {item.icon}
