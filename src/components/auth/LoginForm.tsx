@@ -16,9 +16,9 @@ export default function LoginForm() {
     try {
       setIsLoading(true);
       setError(null);
-      const { data, response } = await login({ email: emailInput, password: passwordInput });
-      if (!response.ok) {
-        setError(data.error || '로그인에 실패했습니다.');
+      const { error } = await login({ email: emailInput, password: passwordInput });
+      if (error) {
+        setError(error.message || '로그인에 실패했습니다.');
         return;
       }
       router.push('/');

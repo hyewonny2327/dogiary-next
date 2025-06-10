@@ -1,7 +1,4 @@
-interface LoginRequest {
-  email: string;
-  password: string;
-}
+import { createClient } from '@/utils/supabase/client';
 
 interface User {
   id: string;
@@ -19,33 +16,7 @@ interface SignupResponse {
   message?: string;
   user?: User;
 }
-
-interface LoginResponse {
-  error?: string;
-  message?: string;
-  user?: User;
-}
-
-export async function login({ email, password }: LoginRequest): Promise<{
-  data: LoginResponse;
-  response: Response;
-}> {
-  const response = await fetch(`/api/auth/login`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      email,
-      password,
-    }),
-  });
-
-  const data = await response.json();
-
-  return { data, response };
-}
-
+const supabase = await createClient();
 export async function signup({ email, password, nickname }: SignupRequest): Promise<{
   data: SignupResponse;
   response: Response;
@@ -66,3 +37,16 @@ export async function signup({ email, password, nickname }: SignupRequest): Prom
 
   return { data, response };
 }
+
+export const logout = async () => {
+  const { error } = await supabase.auth.signOut();
+  return error;
+};
+
+export const login = async ({ email, password }: { email: string; password: string }) => {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
+  return { data, error };
+};
