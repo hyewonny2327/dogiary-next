@@ -99,8 +99,8 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="flex h-[calc(100vh-var(--header-height))] w-full flex-col items-center justify-center">
-      <Container className="h-auto min-h-[200px] w-[520px] min-w-[300px]">
+    <div className="flex h-full w-full flex-col items-center justify-center">
+      <Container className="h-auto min-h-[200px] w-full max-w-[520px] sm:w-[90%] md:w-[80%] lg:w-[520px]">
         <div className="w-full">
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-bold text-gray-900">프로필</h1>
@@ -134,7 +134,7 @@ export default function ProfilePage() {
           <div className="mt-8 flex flex-col gap-4">
             <div>
               <div className="flex justify-center">
-                <div className="relative h-[100px] w-[100px] overflow-hidden rounded-full">
+                <div className="relative h-[80px] w-[80px] overflow-hidden rounded-full sm:h-[100px] sm:w-[100px]">
                   <Image
                     src={profile?.image_url || '/default_profile.png'}
                     alt="프로필이미지"
