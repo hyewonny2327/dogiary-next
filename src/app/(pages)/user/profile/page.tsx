@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useRef } from 'react';
 import Container from '@/components/common/Container';
-import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import { getProfile, updateProfile, updateProfileImage } from '@/api/profileApi';
 import type { Profile } from '@/api/profileApi';
@@ -24,7 +23,6 @@ export default function ProfilePage() {
     try {
       setIsLoading(true);
       const { data, response } = await getProfile();
-      console.log('profile', data);
 
       if (!response.ok) {
         setError(data.error || '프로필을 불러오는데 실패했습니다.');

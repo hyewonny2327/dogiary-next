@@ -39,7 +39,7 @@ export default function UserLayout({ children }: { children: React.ReactNode }) 
   };
 
   const handleWithdrawal = async () => {
-    const confirmed = window.confirm('정말 탈퇴하시겠습니까? 이 작업은 되돌릴 수 없습니다.');
+    // const confirmed = window.confirm('정말 탈퇴하시겠습니까? 이 작업은 되돌릴 수 없습니다.');
     if (!confirmed) return;
 
     setIsLoading(true);
