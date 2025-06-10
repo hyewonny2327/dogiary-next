@@ -8,7 +8,10 @@ interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
 
 export default function Container({ children, className, ...props }: ContainerProps) {
   return (
-    <div className={cn('flex flex-col', 'border-border rounded-lg border', className)} {...props}>
+    <div
+      className={cn('flex flex-col', 'border-border rounded-lg border p-8', className)}
+      {...props}
+    >
       {children}
     </div>
   );
