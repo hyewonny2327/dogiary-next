@@ -30,12 +30,12 @@ export const menuItems: MenuItem[] = [
       {
         icon: '🦮',
         title: '새로운 가족 등록하기',
-        href: '/user/pet/register',
+        href: '/pet/register',
       },
       {
         icon: '🏠',
         title: '우리 가족 보기',
-        href: '/user/pet/list',
+        href: '/pet',
       },
     ],
   },
