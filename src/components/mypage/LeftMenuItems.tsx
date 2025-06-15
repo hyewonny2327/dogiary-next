@@ -1,7 +1,14 @@
 'use client';
 import Link from 'next/link';
-import { menuItems } from '@/constants/myPageMenu';
+import { MenuItem, menuItems } from '@/constants/myPageMenu';
+import { useMenuActions } from '@/hooks/useMenuActions';
 export default function LeftMenuItems() {
+  const { handleMenuAction } = useMenuActions();
+  async function handleMenuClick(item: MenuItem['submenu'][0]) {
+    if (item.actionType) {
+      handleMenuAction(item.actionType);
+    }
+  }
   return (
     <div className="hidden lg:block">
       {menuItems.map((menu) => (
@@ -23,9 +30,9 @@ export default function LeftMenuItems() {
               ) : (
                 <button
                   key={item.title}
-                  onClick={item.onClick}
+                  onClick={() => handleMenuClick(item)}
                   className={`flex w-full items-center rounded-md px-2 py-2 text-sm ${
-                    item.isDestructive
+                    item.actionType === 'withdraw'
                       ? 'text-red-600 hover:bg-red-50'
                       : 'text-gray-700 hover:bg-gray-100'
                   }`}
